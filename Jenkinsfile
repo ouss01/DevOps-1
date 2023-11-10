@@ -28,7 +28,14 @@ pipeline{
                 sh 'mvn clean package'
             }
         }
-
+         stage ('SonarQube :Quality Test')
+            {
+            steps{
+                 withSonarQubeEnv(installationName: 'sonar'){
+                    sh 'mvn sonar:sonar'
+                }
+                }
+            }
        
 
        }    
