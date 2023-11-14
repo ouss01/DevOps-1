@@ -1,13 +1,13 @@
 pipeline{
     agent any
-    
+
     stages{
        stage ('Git'){
          steps{
               git branch :'main',
               url : 'https://github.com/ouss01/DevOps-1.git',
               credentialsId: 'git_credentials'
-              
+
               }
         }
        stage ('MVN Clean')
@@ -36,11 +36,28 @@ pipeline{
                 }
                 }
             }
-       
+       stage("Publish to Nexus Repository Manager") {
+                   steps {
+                        nexusArtifactUploader artifacts: [
+                            [
+                                artifactId: 'achat',
+                                classifier: '',
+                                file: 'target/achat-1.0.jar',
+                                type: 'jar']],
+                            credentialsId: 'Devops',
+                            groupId: 'tn.esprit.rh',
+                            nexusUrl: '192.168.1.12:8081',
+                            nexusVersion: 'nexus3',
+                            protocol: 'http',
+                            repository: 'achat-realeases',
+                            version: '1.0'
+                   }
+                     }
 
-       }    
-        
-        
+
+       }
+
+
 
     }
 
