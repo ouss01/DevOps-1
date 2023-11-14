@@ -54,7 +54,11 @@ pipeline{
                    }
                      }
 
-
+         stage('Docker image'){
+                    steps {
+                         sh 'docker build -t oussematr/springapp .'
+                    }
+                }
        }
 
 
