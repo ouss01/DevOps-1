@@ -56,7 +56,7 @@ pipeline{
 
          stage('Docker image'){
                     steps {
-                         sh 'docker build -t oussematr/springapp .'
+                         sh 'docker build -t ousstrimech/springapp .'
                     }
                 }
 
@@ -73,7 +73,7 @@ pipeline{
                      steps {
          		   withCredentials([string(credentialsId: 'dockerHub1-id', variable: 'dockerhubpwd')]) {
                              sh 'docker login -u ousstrimech -p ${dockerhubpwd}'
-                             sh 'docker push oussematr/springapp'
+                             sh 'docker push ousstrimech/springapp'
 
                          }
                 }
