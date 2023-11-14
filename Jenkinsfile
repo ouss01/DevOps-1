@@ -59,6 +59,25 @@ pipeline{
                          sh 'docker build -t oussematr/springapp .'
                     }
                 }
+
+         stage('DockerCompose') {
+
+                    steps {
+
+         				            sh 'docker-compose up -d'
+                          }
+
+                 }
+
+          stage('push to DockerHub'){
+                     steps {
+         		   withCredentials([string(credentialsId: 'dockerHub1-id', variable: 'dockerhubpwd')]) {
+                             sh 'docker login -u ousstrimech -p ${dockerhubpwd}'
+                             sh 'docker push oussematr/springapp'
+
+                         }
+                }
+                }
        }
 
 
