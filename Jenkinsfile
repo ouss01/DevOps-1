@@ -94,7 +94,9 @@ pipeline{
                 }
        }
 
-
+        stage('Email Configuration'){
+                mail bcc: '', body: 'successful jenkins pipeline build ', cc: '', from: '', replyTo: '', subject: 'Jenkins Job', to: 'oussematrimech@gmail.com'
+        }
 
     }
 
