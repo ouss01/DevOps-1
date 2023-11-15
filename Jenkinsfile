@@ -42,7 +42,10 @@ pipeline{
                   junit 'target/surefire-reports/*.xml'
                 }
               }
-                }
+              }
+              }
+              }
+
 
          stage ('SonarQube :Quality Test')
             {
