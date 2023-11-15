@@ -28,6 +28,22 @@ pipeline{
                 sh 'mvn clean package'
             }
         }
+
+        stage('RUN tests') {
+                    parallel {
+                          stage('Unit test ') {
+                    steps {
+
+                        sh'echo "******** Junit/Mockito test is proceeding .......****"'
+                        sh 'mvn  test'
+                    }
+        		post {
+                always {
+                  junit 'target/surefire-reports/*.xml'
+                }
+              }
+                }
+
          stage ('SonarQube :Quality Test')
             {
             steps{
